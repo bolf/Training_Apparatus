@@ -1,0 +1,85 @@
+{
+  "title": "Тестирование \"Окр.Мир\"",
+  "questionList": [
+    {
+      "question": "Вычислить: 7 * 8",
+      "answers": [
+        "49",
+        "56",
+        "38"
+      ],
+      "rightAnswersInd": [
+        1
+      ],
+      "questionType": "SINGLE",
+      "answerType": "DIGIT"
+    },
+    {
+      "question": "Вычислить: 2 + 2 * 2?",
+      "answers": [
+        "6"
+      ],
+      "rightAnswersInd": [
+        0
+      ],
+      "questionType": "INPUT",
+      "answerType": "DIGIT"
+    },
+    {
+      "question": "Какими действиями можно получить число 48?",
+      "answers": [
+        "24 * 2",
+        "14 * 2",
+        "39 + 9"
+      ],
+      "rightAnswersInd": [
+        0,
+        2
+      ],
+      "questionType": "MULTI",
+      "answerType": "STRING"
+    },
+    {
+      "question": "Какими действиями можно получить число 48?",
+      "answers": [
+        "24 * 2",
+        "14 * 2",
+        "39 + 9"
+      ],
+      "rightAnswersInd": [
+        0,
+        2
+      ],
+      "questionType": "MULTI",
+      "answerType": "STRING"
+    },
+    {
+      "question": "Какими действиями можно получить число 48?",
+      "answers": [
+        "24 * 2",
+        "14 * 2",
+        "39 + 9"
+      ],
+      "rightAnswersInd": [
+        0,
+        2
+      ],
+      "questionType": "MULTI",
+      "answerType": "STRING"
+    },
+    {
+      "question": "Какими действиями можно получить число 48?",
+      "answers": [
+        "24 * 2",
+        "14 * 2",
+        "39 + 9"
+      ],
+      "rightAnswersInd": [
+        0,
+        2
+      ],
+      "questionType": "MULTI",
+      "answerType": "STRING"
+    }
+  ]
+}
