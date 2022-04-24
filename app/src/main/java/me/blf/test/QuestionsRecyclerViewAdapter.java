@@ -13,6 +13,7 @@ import me.blf.test.model.AnswerType;
 import me.blf.test.model.Question;
 import me.blf.test.model.QuestionType;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class QuestionsRecyclerViewAdapter extends RecyclerView.Adapter<QuestionsRecyclerViewAdapter.QViewHolder> {
@@ -35,6 +36,7 @@ public class QuestionsRecyclerViewAdapter extends RecyclerView.Adapter<Questions
     @Override
     public void onBindViewHolder(@NonNull QViewHolder holder, int position) {
         var curQuestion = questionList.get(position);
+        holder.question = curQuestion;
         holder.questionTV.setText(curQuestion.getQuestion());
         holder.answerHintTV.setText(QuestionType.getQuestionHintByType(curQuestion.getQuestionType()));
         //заполнение вариантов ответов
@@ -44,8 +46,8 @@ public class QuestionsRecyclerViewAdapter extends RecyclerView.Adapter<Questions
             } else if (curQuestion.getAnswerType() == AnswerType.DIGIT) {
                 holder.answerET.setInputType(EditorInfo.TYPE_CLASS_NUMBER);
             }
-            setAnswerCheckBoxVisibility(holder, View.GONE);
-            setAnswerRadioButtonsVisibility(holder, View.GONE);
+            setOffAnswerCheckBoxVisibility(holder);
+            setOffAnswerRadioButtonsVisibility(holder);
             holder.answerET.setVisibility(View.VISIBLE);
 
             //восстановление состояния
@@ -54,8 +56,8 @@ public class QuestionsRecyclerViewAdapter extends RecyclerView.Adapter<Questions
             }
 
         } else if (curQuestion.getQuestionType() == QuestionType.SINGLE) {
-            setAnswerRadioButtonsVisibility(holder, View.GONE);
-            setAnswerCheckBoxVisibility(holder, View.GONE);
+            setOffAnswerRadioButtonsVisibility(holder);
+            setOffAnswerCheckBoxVisibility(holder);
             holder.answerET.setVisibility(View.GONE);
             for (int i = 0; i < curQuestion.getAnswers().length; i++) {
                 holder.answerRbArr[i].setText(curQuestion.getAnswers()[i]);
@@ -69,32 +71,36 @@ public class QuestionsRecyclerViewAdapter extends RecyclerView.Adapter<Questions
             }
 
         } else if (curQuestion.getQuestionType() == QuestionType.MULTI) {
-            setAnswerRadioButtonsVisibility(holder, View.GONE);
-            setAnswerCheckBoxVisibility(holder, View.GONE);
+            setOffAnswerRadioButtonsVisibility(holder);
+            setOffAnswerCheckBoxVisibility(holder);
             holder.answerET.setVisibility(View.GONE);
             for (int i = 0; i < curQuestion.getAnswers().length; i++) {
                 holder.answerCBArr[i].setText(curQuestion.getAnswers()[i]);
                 holder.answerCBArr[i].setVisibility(View.VISIBLE);
                 holder.answerCBArr[i].setTag(i);
             }
+
+            //восстановление состояния
+            Arrays.stream(holder.answerCBArr).forEach(checkBox -> checkBox.setChecked(false));
+            curQuestion.getUserAnswersIndexesList().forEach(index -> holder.answerCBArr[index].setChecked(true));
         }
-        holder.question = curQuestion;
+
         if (holder.question.getMarkImage() > 0) {
             holder.markImage.setImageResource(holder.question.getMarkImage());
         }
-        //восстановление состояния
-        curQuestion.getUserAnswersIndexesList().forEach(integer -> holder.answerCBArr[integer].setSelected(true));
+
+        holder.questNumTV.setText(position + 1 + "/" + questionList.size());
     }
 
-    private void setAnswerRadioButtonsVisibility(QViewHolder holder, int visibility) {
+    private void setOffAnswerRadioButtonsVisibility(QViewHolder holder) {
         for(var rB : holder.answerRbArr) {
-            rB.setVisibility(visibility);
+            rB.setVisibility(View.GONE);
         }
     }
 
-    private void setAnswerCheckBoxVisibility(QViewHolder holder, int visibility) {
+    private void setOffAnswerCheckBoxVisibility(QViewHolder holder) {
         for(var cB : holder.answerCBArr) {
-            cB.setVisibility(visibility);
+            cB.setVisibility(View.GONE);
         }
     }
 
@@ -112,6 +118,7 @@ public class QuestionsRecyclerViewAdapter extends RecyclerView.Adapter<Questions
         Question question;
         RadioGroup radioGroup;
         ImageView markImage;
+        TextView questNumTV;
 
         public QViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -163,6 +170,8 @@ public class QuestionsRecyclerViewAdapter extends RecyclerView.Adapter<Questions
                 return false;
             });
             markImage = itemView.findViewById(R.id.markImageView);
+
+            questNumTV = itemView.findViewById(R.id.questNum);
         }
     }
 }
