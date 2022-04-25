@@ -5,6 +5,8 @@ import java.util.List;
 public class TestSet {
     private String title;
     List<Question> questionList;
+    private Integer RightAnswersQuantity = 0;
+    private Float RightAnswersPercent = 0f;
 
     public TestSet() {
     }
@@ -28,5 +30,21 @@ public class TestSet {
 
     public void setQuestionList(List<Question> questionList) {
         this.questionList = questionList;
+    }
+
+    public Integer getRightAnswersQuantity() {
+        return RightAnswersQuantity;
+    }
+
+    public void setRightAnswersQuantity(Integer rightAnswersQuantity) {
+        RightAnswersQuantity = rightAnswersQuantity;
+    }
+
+    public Float getRightAnswersPercent() {
+        return RightAnswersPercent;
+    }
+
+    public void setRightAnswersPercent(Float rightAnswersPercent) {
+        RightAnswersPercent = rightAnswersPercent;
     }
 }

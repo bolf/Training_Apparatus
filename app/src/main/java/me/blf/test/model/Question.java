@@ -14,7 +14,8 @@ public class Question {
     private AnswerType answerType;
     private List<Integer> userAnswersIndexesList = new ArrayList<>();
     private String userAnswer;
-    int markImage;
+    private int markImage;
+    private int rightAnswer = 0;
 
     public Question() {
     }
@@ -85,5 +86,13 @@ public class Question {
 
     public void setUserAnswer(String userAnswer) {
         this.userAnswer = userAnswer;
+    }
+
+    public int getRightAnswer() {
+        return rightAnswer;
+    }
+
+    public void setRightAnswer(int rightAnswer) {
+        this.rightAnswer = rightAnswer;
     }
 }
