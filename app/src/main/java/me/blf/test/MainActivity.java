@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,12 +28,15 @@ import java.util.stream.Collectors;
 public class MainActivity extends AppCompatActivity {
     private TestSet testSet;
     private RecyclerView recyclerView;
+    private Button buttonFinish;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle("Тренажер знаний");
+        buttonFinish = findViewById(R.id.buttonFinish);
+        buttonFinish.setVisibility(View.GONE);
     }
 
     private static final int FILE_REQUEST_CODE = 2;
@@ -66,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
             findViewById(R.id.buttonChooseFile).setVisibility(View.GONE);
+            buttonFinish.setVisibility(View.VISIBLE);
         }
     }
 
